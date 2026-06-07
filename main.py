@@ -1,6 +1,6 @@
-import os  # Importa a biblioteca do Python que permite trabalhar com arquivos e pastas
+import os  # Importa a biblioteca 
+import shutil  # Biblioteca para copiar arquivos de uma pasta para outra
 
-# Define o nome da pasta onde ficam os documentos da biblioteca
 PASTA_DOCUMENTOS = "documentos"
 
 
@@ -8,13 +8,28 @@ def listar_documentos():
     # Função que lista todos os arquivos da pasta documentos
     print("\n=== Documentos da Biblioteca ===")
 
-    arquivos = os.listdir(PASTA_DOCUMENTOS)  # Pega a lista de arquivos da pasta
+    arquivos = os.listdir(PASTA_DOCUMENTOS) 
 
-    if len(arquivos) == 0:  # Verifica se a pasta está vazia
+    if len(arquivos) == 0:  
         print("Nenhum documento encontrado.")
     else:
-        for i, arquivo in enumerate(arquivos, start=1):  # Percorre cada arquivo da lista
+        for i, arquivo in enumerate(arquivos, start=1):  
             print(f"{i} - {arquivo}")  # Exibe o número e o nome do arquivo
+
+
+def adicionar_documento():
+    # Função que copia um arquivo de qualquer lugar do computador para a pasta documentos
+    print("\n=== Adicionar Documento ===")
+
+    caminho = input("Digite o caminho completo do arquivo: ")  # Usuário informa onde está o arquivo
+
+    if os.path.isfile(caminho):  
+        nome_arquivo = os.path.basename(caminho)  # Pega só o nome do arquivo, sem o caminho
+        destino = os.path.join(PASTA_DOCUMENTOS, nome_arquivo)  
+        shutil.copy(caminho, destino)  
+        print(f"\nArquivo '{nome_arquivo}' adicionado com sucesso!")
+    else:
+        print("\nArquivo não encontrado. Verifique o caminho informado.")
 
 
 def menu():
@@ -35,7 +50,7 @@ while True:
     if opcao == "1":
         listar_documentos()  # Chama a função de listar
     elif opcao == "2":
-        print("\nFunção adicionar - em breve")
+        adicionar_documento()  # Chama a função de adicionar
     elif opcao == "3":
         print("\nFunção renomear - em breve")
     elif opcao == "4":
