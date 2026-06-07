@@ -51,6 +51,26 @@ def renomear_documento():
         print("\nArquivo não encontrado. Verifique o nome informado.")
 
 
+def remover_documento():
+    # Função que remove um arquivo da pasta documentos
+    print("\n=== Remover Documento ===")
+
+    listar_documentos()  # Mostra os arquivos disponíveis para o usuário escolher
+
+    nome = input("\nDigite o nome do arquivo que deseja remover: ")  # Usuário informa o nome
+    caminho = os.path.join(PASTA_DOCUMENTOS, nome)  # Monta o caminho completo do arquivo
+
+    if os.path.isfile(caminho):  # Verifica se o arquivo existe na pasta
+        confirmacao = input(f"Tem certeza que deseja remover '{nome}'? (s/n): ")  # Pede confirmação
+        if confirmacao.lower() == "s":  # lower() converte para minúsculo para aceitar S ou s
+            os.remove(caminho)  # Remove o arquivo
+            print(f"\nArquivo '{nome}' removido com sucesso!")
+        else:
+            print("\nRemoção cancelada.")
+    else:
+        print("\nArquivo não encontrado. Verifique o nome informado.")
+
+
 def menu():
     # Função que exibe o menu de opções na tela
     print("\n=== Biblioteca Digital ===")
@@ -73,7 +93,7 @@ while True:
     elif opcao == "3":
         renomear_documento()  # Chama a função de renomear
     elif opcao == "4":
-        print("\nFunção remover - em breve")
+        remover_documento()  # Chama a função de remover
     elif opcao == "5":
         print("\nEncerrando o sistema. Até logo!")
         break  # break encerra o loop e fecha o programa
