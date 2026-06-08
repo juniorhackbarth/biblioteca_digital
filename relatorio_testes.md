@@ -14,6 +14,8 @@ após isso foi testado opção por opção e todas funcionaram conforme o progra
 - Opção 2 - foi adicionado um arquivo pdf através e um caminho e o arquivo foi copiado para a pasta documentos com sucesso
 - Opção 3 - Renomeiei o mesmo arquivo que havia copiado e tudo ocorreu corretamente
 - Opção 4 - Exclui o mesmo arquivo.
+- Opção 5 - criar um novo diretório (uma nova pasta) foi criado uma pasta teste
+- |Opção 6 - exclui um diretório (pasta) foi testado e excluido a pastas testes criadas anteriormente
 
 **primeiros testes aprovados**
 
