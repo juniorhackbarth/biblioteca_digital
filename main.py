@@ -71,6 +71,45 @@ def remover_documento():
         print("\nArquivo não encontrado. Verifique o nome informado.")
 
 
+def criar_diretorio():
+    # Função que cria uma nova subpasta dentro da pasta documentos
+    print("\n=== Criar Diretório ===")
+
+    nome = input("Digite o nome do novo diretório: ")  # Usuário informa o nome da pasta
+    caminho = os.path.join(PASTA_DOCUMENTOS, nome)  # Monta o caminho completo
+
+    if os.path.exists(caminho):  # Verifica se já existe uma pasta com esse nome
+        print("\nJá existe um diretório com esse nome.")
+    else:
+        os.mkdir(caminho)  # Cria a pasta
+        print(f"\nDiretório '{nome}' criado com sucesso!")
+
+
+def remover_diretorio():
+    # Função que remove uma subpasta dentro da pasta documentos
+    print("\n=== Remover Diretório ===")
+
+    nome = input("Digite o nome do diretório que deseja remover: ")  # Usuário informa o nome
+    caminho = os.path.join(PASTA_DOCUMENTOS, nome)  # Monta o caminho completo
+
+    if os.path.isdir(caminho):  # Verifica se existe uma pasta com esse nome
+        confirmacao = input(f"Tem certeza que deseja remover o diretório '{nome}'? (s/n): ")
+        if confirmacao.lower() == "s":
+            try:
+                # Remove cada arquivo dentro da pasta antes de remover a pasta
+                for arquivo in os.listdir(caminho):
+                    caminho_arquivo = os.path.join(caminho, arquivo)
+                    if os.path.isfile(caminho_arquivo):
+                        os.remove(caminho_arquivo)  # Remove cada arquivo individualmente
+                os.rmdir(caminho)  # Remove a pasta vazia
+                print(f"\nDiretório '{nome}' removido com sucesso!")
+            except PermissionError:
+                print("\nNão foi possível remover. Feche o Explorer e tente novamente.")
+        else:
+            print("\nRemoção cancelada.")
+    else:
+        print("\nDiretório não encontrado. Verifique o nome informado.")
+
 def menu():
     # Função que exibe o menu de opções na tela
     print("\n=== Biblioteca Digital ===")
@@ -78,7 +117,9 @@ def menu():
     print("2 - Adicionar documento")
     print("3 - Renomear documento")
     print("4 - Remover documento")
-    print("5 - Sair")
+    print("5 - Criar diretório")
+    print("6 - Remover diretório")
+    print("7 - Sair")
 
 
 # while True significa: repete o programa infinitamente até o usuário escolher sair
@@ -95,6 +136,10 @@ while True:
     elif opcao == "4":
         remover_documento()  # Chama a função de remover
     elif opcao == "5":
+        criar_diretorio()  # Chama a função de criar diretório
+    elif opcao == "6":
+        remover_diretorio()  # Chama a função de remover diretório
+    elif opcao == "7":
         print("\nEncerrando o sistema. Até logo!")
         break  # break encerra o loop e fecha o programa
     else:
